@@ -4,6 +4,32 @@ ProcessTwin combines transparent reduced-order process physics with an AI surrog
 
 This is an educational research prototype, not commercial TCAD or fab-calibrated process prediction.
 
+![ProcessTwin system flow from process recipe through reduced-order physics, surrogate learning, uncertainty, and simulator verification](outputs/figures/system_flow.png)
+
+## Technical snapshot
+
+| Question | Implementation |
+|---|---|
+| What is being approximated? | A declared reduced-order simulator for silicon oxidation and 1D dopant diffusion |
+| What does the model predict? | Oxide thickness, junction depth, peak concentration, and the full depth profile |
+| How is the profile represented? | PCA coefficients reconstructed into a concentration profile |
+| How is model disagreement exposed? | An uncalibrated dispersion band from three residual MLP members plus an OOD warning |
+| How is inverse design checked? | Candidate recipes are rerun through the physics simulator before being reported |
+
+### Held-out simulator-fidelity result
+
+| Target | Interpolation R² |
+|---|---:|
+| Oxide thickness | 0.9968 |
+| Junction depth | 0.9985 |
+
+These values measure fidelity to the declared simulator on the saved held-out split. They are not evidence of accuracy against fabricated wafers.
+
+The complete saved evaluation is in [`outputs/metrics.json`](outputs/metrics.json). Two results are especially important for interpretation:
+
+- The surrogate took 17.17 μs/recipe versus 11.32 μs/recipe for the simple physics solver on the interpolation test (0.66× measured speedup), so this experiment does **not** establish general acceleration over the reduced-order simulator. On the saved OOD set, the measured ratio was 3.40×.
+- The nominal 90% three-member ensemble bands covered 79.9% of oxide, 77.8% of junction, and 86.2% of peak targets on the test split, with lower coverage on OOD data. They are therefore reported as uncalibrated model-disagreement bands, not calibrated predictive intervals.
+
 ## Implemented
 
 - Deal-Grove thermal oxidation with temperature-dependent coefficients
@@ -11,7 +37,7 @@ This is an educational research prototype, not commercial TCAD or fab-calibrated
 - Deterministic 6,000-recipe simulated DOE with blocked interpolation and high-temperature OOD sets
 - Polynomial ridge/PCA baseline and three-member residual MLP/PCA ensemble
 - Oxide, junction, peak-concentration and full-profile metrics
-- Ensemble uncertainty, OOD warning, and simulator-verified inverse recipe design
+- Ensemble disagreement bands, OOD warning, and simulator-verified inverse recipe design
 - Streamlit process explorer, tests, saved artifacts, DOCX/PDF report
 
 ## Quick start — macOS/Linux
@@ -48,9 +74,27 @@ streamlit run app.py
 - `outputs/inverse_design.json`: simulator-verified inverse design example
 - `outputs/processtwin_report.docx` and `.pdf`: presentation-ready technical report
 
+## Repository map
+
+```text
+app.py                 Streamlit process explorer
+src/processtwin/       Physics, data generation, and surrogate modules
+scripts/               Generate, train, evaluate, invert, and report workflows
+tests/                 Physics invariants and model tests
+data/                  Reproducible simulated DOE
+artifacts/             Saved surrogate pipeline
+outputs/               Metrics, figures, inverse-design example, and report
+```
+
 ## Scientific scope
 
 Ground truth is generated locally from simplified continuum models and literature-scale coefficients. The simulator omits geometry effects, segregation, clustering, transient-enhanced diffusion, implant damage, stress, equipment variation, and fab calibration. Quantitative results establish surrogate fidelity to this declared simulator only.
+
+The inverse-design example is verified against the same simplified solver that generated the training targets. It demonstrates numerical search and simulator consistency; it does not establish physical recipe validity, uniqueness, manufacturability, or transfer to a fabrication process.
+
+## Artifact safety
+
+`artifacts/surrogate.joblib` is provided for reproducibility. Python pickle/joblib files can execute code while loading; only load the bundled artifact from a trusted checkout, and never load an untrusted replacement.
 
 ## Tests
 
