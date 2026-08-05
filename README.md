@@ -2,7 +2,7 @@
 
 ProcessTwin combines transparent reduced-order process physics with an AI surrogate for silicon oxidation and dopant diffusion. It predicts oxide thickness, full concentration profiles, junction depth, and uncertainty from a process recipe, and verifies inverse-designed recipes in the physics simulator.
 
-This is an educational research prototype, not commercial TCAD or fab-calibrated process prediction.
+This is an educational research prototype, not commercial process software or fab-calibrated process prediction.
 
 ![ProcessTwin system flow from process recipe through reduced-order physics, surrogate learning, uncertainty, and simulator verification](outputs/figures/system_flow.png)
 

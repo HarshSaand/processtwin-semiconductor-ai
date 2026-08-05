@@ -10,7 +10,7 @@ from processtwin.model import load,predict
 from processtwin.physics import simulate,DEPTH_UM
 
 st.set_page_config(page_title='ProcessTwin',layout='wide'); st.title('ProcessTwin — AI Process Surrogate')
-st.caption('Educational reduced-order silicon process model. Not calibrated commercial TCAD or fab-qualified prediction.')
+st.caption('Educational reduced-order silicon process model. Not calibrated commercial process software or fab-qualified prediction.')
 ambient=st.sidebar.selectbox('Oxidation ambient',['dry','wet']); ot=st.sidebar.slider('Oxidation temperature (°C)',850,1150,1000); omin=st.sidebar.slider('Oxidation time (min)',5,180,60)
 species=st.sidebar.selectbox('Dopant',['B','P']); dose=10**st.sidebar.slider('log10 dose (cm⁻²)',12.5,15.5,14.0,.1); rp=st.sidebar.slider('Projected range (µm)',.03,.35,.12,.01); sig=st.sidebar.slider('Straggle (µm)',.015,.09,.04,.005)
 at=st.sidebar.slider('Anneal temperature (°C)',800,1150,950); ats=10**st.sidebar.slider('log10 anneal time (s)',.7,3.0,2.0,.1); bg=10**st.sidebar.slider('log10 background (cm⁻³)',15.0,17.0,16.0,.1)

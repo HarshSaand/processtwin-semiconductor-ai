@@ -1,7 +1,7 @@
 """Reduced-order silicon thermal oxidation and dopant diffusion physics.
 
 This module is intentionally transparent and educational. It is not calibrated
-commercial TCAD and does not model segregation, clustering, implant damage or TED.
+commercial process software and does not model segregation, clustering, implant damage or TED.
 """
 from __future__ import annotations
 import numpy as np
