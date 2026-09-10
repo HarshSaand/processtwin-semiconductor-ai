@@ -6,6 +6,19 @@ This is an educational research prototype, not commercial process software or fa
 
 ![ProcessTwin system flow from process recipe through reduced-order physics, surrogate learning, uncertainty, and simulator verification](outputs/figures/system_flow.png)
 
+## Dataset at a glance
+
+The saved [`data/simulated.npz`](data/simulated.npz) contains **6,000 synthetic process recipes**, generated locally by the reduced-order oxidation/diffusion simulator—not measurements from a fab. One example combines process settings (temperatures, times, wet/dry ambient, dopant species, dose and implantation/background parameters) with simulated oxide thickness, junction depth, peak concentration and a **121-point concentration-versus-depth profile**. The file stores recipe/target records, log-concentration profiles and their shared depth grid.
+
+| Partition | Recipes | Purpose |
+|---|---:|---|
+| Training | 4,105 | Fit the surrogate |
+| Validation | 458 | Model selection |
+| Test | 477 | Held-out temperature-bin evaluation |
+| High-temperature OOD | 960 | Check behaviour outside the training anneal-temperature range |
+
+Validation/test assignments hold out complete 25°C anneal-temperature bins; OOD recipes use annealing temperatures of 1,055–1,150°C. These counts describe the saved run, not independent physical wafers. See [`src/processtwin/data.py`](src/processtwin/data.py) for generation and splitting.
+
 ## Technical snapshot
 
 | Question | Implementation |
