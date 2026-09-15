@@ -1,0 +1,41 @@
+{
+  "surrogate_candidate": {
+    "ambient": "wet",
+    "species": "B",
+    "dose_cm2": 100000000000000.0,
+    "rp_um": 0.12,
+    "straggle_um": 0.04,
+    "background_cm3": 1e+16,
+    "initial_oxide_nm": 2.0,
+    "oxidation_temp_c": 966.5084791354614,
+    "oxidation_time_min": 23.903575096673794,
+    "anneal_temp_c": 1029.109240903795,
+    "anneal_time_s": 233.0079315143629
+  },
+  "surrogate_objective": 7.099964222251714e-08,
+  "candidate_solver_check": {
+    "oxide_nm": 134.28161944229566,
+    "junction_um": 0.3201326488499486
+  },
+  "refined_recipe": {
+    "ambient": "wet",
+    "species": "B",
+    "dose_cm2": 100000000000000.0,
+    "rp_um": 0.12,
+    "straggle_um": 0.04,
+    "background_cm3": 1e+16,
+    "initial_oxide_nm": 2.0,
+    "oxidation_temp_c": 962.7232600889201,
+    "oxidation_time_min": 22.022615474620668,
+    "anneal_temp_c": 1029.102488658258,
+    "anneal_time_s": 232.32281468465348
+  },
+  "refined_solver_verified": {
+    "oxide_nm": 120.00000006276967,
+    "junction_um": 0.3200000029539784
+  },
+  "targets": {
+    "target_oxide_nm": 120,
+    "target_junction_um": 0.32
+  }
+}

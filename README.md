@@ -1,5 +1,20 @@
 # ProcessTwin — Physics-Grounded AI for Silicon Thermal Processing
 
+## Inspect an actual output
+
+![A target becomes an inspectable process recipe](docs/output-showcase.png)
+
+Saved inverse-design result: surrogate proposal refined with the same reduced-order solver. Simulated silicon processing, not fabricated-wafer validation.
+
+[Open the result record](docs/output-example.json) · [Open the HTML report](docs/output-showcase.html)
+
+Reproduce the underlying output after installing the repository dependencies, using the bundled surrogate checkpoint. This writes `outputs/inverse_design.json`; the showcase JSON is a saved copy.
+
+```sh
+python scripts/inverse_design.py
+```
+
+
 ProcessTwin combines transparent reduced-order process physics with an AI surrogate for silicon oxidation and dopant diffusion. It predicts oxide thickness, full concentration profiles, junction depth, and uncertainty from a process recipe, and verifies inverse-designed recipes in the physics simulator.
 
 This is an educational research prototype, not commercial process software or fab-calibrated process prediction.
