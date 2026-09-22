@@ -1,5 +1,7 @@
 # ProcessTwin — Physics-Grounded AI for Silicon Thermal Processing
 
+[Read the project report (PDF)](docs/PROJECT_REPORT.pdf) · [Explore the explanation and flow diagram](docs/PROJECT_REPORT.md)
+
 ## Inspect an actual output
 
 ![A target becomes an inspectable process recipe](docs/output-showcase.png)
